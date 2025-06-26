@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirm Delete</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      text-align: center;
+      color: #dc3545;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-delete {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background-color: #c82333;
+    }
+
+    .btn-cancel {
+      background-color: #6c757d;
+      color: white;
+      margin-left: 10px;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+    }
+
+    .btn-cancel:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Confirm Delete</h2>
+    <p>Are you sure you want to delete the poll:</p>
+    <h3>"{{ poll.statement }}"</h3>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-delete">Yes, Delete</button>
+      <a href="{% url 'poll-detail' poll.id %}" class="btn-cancel">Cancel</a>
+    </form>
+  </div>
+</body>
+</html>

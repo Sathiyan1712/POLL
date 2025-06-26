@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Poll Detail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f7f9fc;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #444;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 8px 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+
+    .btn-vote {
+      background-color: #007bff;
+      color: #fff;
+      margin-top: 10px;
+    }
+
+    .btn-vote:hover {
+      background-color: #0056b3;
+    }
+
+    .message {
+      color: green;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>{{ req_poll.statement }}</h1>
+
+    {% if has_voted %}
+      <p class="message">✔️ You have already voted.</p>
+    {% else %}
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-vote">Vote</button>
+      </form>
+    {% endif %}
+
+    <h2>Current Votes:</h2>
+    <ul>
+      <li>{{ req_poll.option1 }} — <strong>{{ req_poll.vote1 }}</strong></li>
+      <li>{{ req_poll.option2 }} — <strong>{{ req_poll.vote2 }}</strong></li>
+      <li>{{ req_poll.option3 }} — <strong>{{ req_poll.vote3 }}</strong></li>
+    </ul>
+    <div style="text-align: center; margin-top: 30px;">
+  <a href="{% url 'poll-delete' req_poll.id %}" class="btn btn-danger">
+    🗑️ Delete This Poll
+  </a>
+</div>
+
+    
+  </div>
+</body>
+</html>

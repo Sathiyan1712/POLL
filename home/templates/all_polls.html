@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Polls </title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .brand {
+      font-size: 28px;
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .actions a {
+      text-decoration: none;
+      margin-left: 10px;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .actions .create-btn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .actions .logout-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    ul.poll-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .poll-item {
+      background-color: #f9f9f9;
+      margin-bottom: 12px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    .poll-item:hover {
+      background-color: #eef6ff;
+    }
+
+    .poll-item a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .poll-item .delete {
+      background-color: #ff4d4d;
+      color: white;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .poll-item .delete:hover {
+      background-color: #d63031;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">Polls</div>
+      <div class="actions">
+        <a href="{% url 'create-poll' %}" class="create-btn">+ Create Poll</a>
+        <a href="{% url 'logout-user' %}" class="logout-btn">Logout</a>
+      </div>
+    </div>
+
+    <h2>Available Polls</h2>
+
+    {% if all_polls %}
+      <ul class="poll-list">
+        {% for poll in all_polls %}
+          <li class="poll-item">
+            <a href="{% url 'poll-detail' poll.id %}">{{ poll.statement }}</a>
+            
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No polls available yet.</p>
+    {% endif %}
+  </div>
+</body>
+</html>
