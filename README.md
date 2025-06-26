@@ -28,9 +28,7 @@ This app can be used in:
 - **Frontend:** HTML, CSS (Bootstrap)
 - **Version Control:** Git + GitHub
 
-## 📷 Screenshots
 
-*Add screenshots here if you have any*
 
 ## 📦 Setup Instructions
 
